@@ -1,0 +1,15 @@
+
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(‡—ý¿úÿÿÿÿ
+`
+java:S2095"JUse try-with-resources or close this "ServerSocket" in a "finally" clause.(£¤íë
+S	java:S106"9Replace this use of System.out or System.err by a logger.(‡‚·Šûÿÿÿÿ
+S	java:S106"9Replace this use of System.out or System.err by a logger.(´ÎœŒøÿÿÿÿ
+S	java:S106!"9Replace this use of System.out or System.err by a logger.(Æ«¾³ùÿÿÿÿ
+N	java:S1060"9Replace this use of System.out or System.err by a logger.(Ú¨ùæ
+N	java:S1062"9Replace this use of System.out or System.err by a logger.(Êáäù
+<
+java:S11258"'Remove the unnecessary boolean literal.(Öã’B
+L
+java:S2696:"6Make the enclosing method "static" or remove this set.(›éå
+Q
+java:S2696;"6Make the enclosing method "static" or remove this set.(Ì±‡‡üÿÿÿÿ

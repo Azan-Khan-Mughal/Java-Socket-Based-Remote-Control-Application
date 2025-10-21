@@ -1,0 +1,18 @@
+
+`	java:S112\"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ
+b	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(¼ÃÒ
+U
+java:S1161C":Add the "@Override" annotation above this method signature(ÿŸ¾Ğüÿÿÿÿ
+N	java:S106e"9Replace this use of System.out or System.err by a logger.(™‰•Ô
+S	java:S106h"9Replace this use of System.out or System.err by a logger.(òÃÄÿÿÿÿÿ
+y
+java:S2142r"^Either re-interrupt this method or rethrow the "InterruptedException" that can be caught here.(ñ“Š±üÿÿÿÿ
+Q
+java:S1161‡":Add the "@Override" annotation above this method signature(“–ış
+T	java:S106‹"9Replace this use of System.out or System.err by a logger.(™ ä¶ûÿÿÿÿ
+T	java:S106"9Replace this use of System.out or System.err by a logger.(­¨İøÿÿÿÿ
+N	java:S106“"9Replace this use of System.out or System.err by a logger.(—ÊÚ
+T	java:S106–"9Replace this use of System.out or System.err by a logger.(÷‡¾˜øÿÿÿÿ
+=	java:S131—""Add a default case to this switch.(¸ìù«üÿÿÿÿ
+C
+java:S1128"(Remove this unused import 'javax.swing'.(Ìí¿Üüÿÿÿÿ

@@ -1,0 +1,35 @@
+
+P
+java:S1141J"5Extract this nested try block into a separate method.(¡»¢üùÿÿÿÿ
+g	java:S101"MRename this class name to match the regular expression '^[A-Z][a-zA-Z0-9]*$'.(ìÊ§Àùÿÿÿÿ
+Y
+java:S2259W"CA "NullPointerException" could be thrown; "image" is nullable here.(šµÚ›
+P
+java:S1161":Add the "@Override" annotation above this method signature(“–ýþ
+P
+java:S1161C":Add the "@Override" annotation above this method signature(“–ýþ
+<
+java:S1481K"&Remove this unused "a" local variable.(®š‹á
+S	java:S106N"9Replace this use of System.out or System.err by a logger.(¬¸½Íøÿÿÿÿ
+N	java:S106Q"9Replace this use of System.out or System.err by a logger.(í­ÞØ
+—
+java:S1186‡"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(®—ËF
+
+java:S1186™"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ä Ïúüÿÿÿÿ
+
+java:S1186Â"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ö„˜þúÿÿÿÿ
+
+java:S1186Æ"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(•ßçùÿÿÿÿ
+˜
+java:S1186Ë"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(÷—
+O	java:S106Ž"9Replace this use of System.out or System.err by a logger.(‚–¿•
+O	java:S106"9Replace this use of System.out or System.err by a logger.(€—Ï¼
+O	java:S106‘"9Replace this use of System.out or System.err by a logger.(ðÍŒ¿
+O	java:S106¥"9Replace this use of System.out or System.err by a logger.(†’ôô
+T	java:S106µ"9Replace this use of System.out or System.err by a logger.(Ÿ‡ ¸ùÿÿÿÿ
+O	java:S106¸"9Replace this use of System.out or System.err by a logger.(¤ºƒ¿
+T	java:S106Ï"9Replace this use of System.out or System.err by a logger.(Óí…žþÿÿÿÿ
+T	java:S106Ö"9Replace this use of System.out or System.err by a logger.(Ÿ‡ ¸ùÿÿÿÿ
+R	java:S125ä"<This block of commented-out lines of code should be removed.(©ŒÒˆ
+T
+java:S1128"9Remove this unused import 'java.awt.image.BufferedImage'.(×íÐ‡þÿÿÿÿ
