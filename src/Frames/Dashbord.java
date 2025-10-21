@@ -1,13 +1,16 @@
+package Frames;
+
+import AppConfig.ApplicationManager;
+import FileTransfer.File_Transfer;
+import Sending.Sending_Device;
+
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.*;
 import java.net.InetAddress;
-import java.net.Socket;
 import java.net.UnknownHostException;
 
 
@@ -25,7 +28,7 @@ public class Dashbord {
 
         //setting us dashboard frame
         frame = new JFrame();
-        frame.getContentPane().setBackground(Staticwaliclass.bg);
+        frame.getContentPane().setBackground(ApplicationManager.BACKGROUND_COLOUR);
         frame.setLayout(null);
         frame.setSize(1000,600);
         frame.setResizable(false);
@@ -40,8 +43,8 @@ public class Dashbord {
         } catch (UnknownHostException e) {
             throw new RuntimeException(e);
         }
-        JLabel port = new JLabel("Port:"+ Staticwaliclass.port);
-        JLabel password = new JLabel("Password: "+ Staticwaliclass.password);
+        JLabel port = new JLabel("Port:"+ ApplicationManager.port);
+        JLabel password = new JLabel("Password: "+ ApplicationManager.password);
 
         IP.setLocation(725,10);
         IP.setSize(100,30);
@@ -58,9 +61,9 @@ public class Dashbord {
 
         //Setting Up and Adding File Transfer button
         JButton FileTransfer = new JButton("File Transfer");
-        FileTransfer.setBackground(Staticwaliclass.primary);
+        FileTransfer.setBackground(ApplicationManager.PRIMARY_COLOUR);
         FileTransfer.setFocusable(false);
-        FileTransfer.setForeground(Staticwaliclass.secondary);
+        FileTransfer.setForeground(ApplicationManager.SECONDARY_COLOUR);
         FileTransfer.setSize(150,35);
         FileTransfer.setLocation(15,15);
         FileTransfer.addActionListener(new ActionListener() {
@@ -74,7 +77,7 @@ public class Dashbord {
 
         //Setting up panel to store remote devices
         JPanel panal = new JPanel();
-        panal.setBackground(Staticwaliclass.primary);
+        panal.setBackground(ApplicationManager.PRIMARY_COLOUR);
         panal.setSize(1000,435);
         panal.setLocation(0,75);
         panal.setLayout(null);
@@ -85,13 +88,13 @@ public class Dashbord {
         RemotePCLable.setSize(200,45);
         RemotePCLable.setFont(new Font("Serif", Font.BOLD, 25));
         RemotePCLable.setLocation(45,0);
-        RemotePCLable.setForeground(Staticwaliclass.secondary);
+        RemotePCLable.setForeground(ApplicationManager.SECONDARY_COLOUR);
         panal.add(RemotePCLable);
 
         JButton Add = new JButton("Add PC");
         Add.setSize(100,30);
-        Add.setBackground(Staticwaliclass.bg);
-        Add.setForeground(Staticwaliclass.primary);
+        Add.setBackground(ApplicationManager.BACKGROUND_COLOUR);
+        Add.setForeground(ApplicationManager.PRIMARY_COLOUR);
         Add.setFocusable(false);
         Add.setLocation(875,10);
         Add.addActionListener(new ActionListener() {
@@ -104,7 +107,7 @@ public class Dashbord {
 
 
         RemotePCPanel = new JPanel();
-        RemotePCPanel.setBackground(Staticwaliclass.secondary);
+        RemotePCPanel.setBackground(ApplicationManager.SECONDARY_COLOUR);
         RemotePCPanel.setSize(850,385);
         RemotePCPanel.setLocation(65,50);
         RemotePCPanel.setLayout(new FlowLayout(FlowLayout.LEFT,25,10));
@@ -117,7 +120,7 @@ public class Dashbord {
         GiveAccessLabel.setSize(800,50);
         GiveAccessLabel.setFont(new Font("Serif", Font.BOLD, 25));
         GiveAccessLabel.setLocation(542,508);
-        GiveAccessLabel.setForeground(Staticwaliclass.primary);
+        GiveAccessLabel.setForeground(ApplicationManager.PRIMARY_COLOUR);
         frame.add(GiveAccessLabel);
 
         give = new JButton("Connect");
@@ -130,12 +133,12 @@ public class Dashbord {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                if(Staticwaliclass.sending_data == false){
+                if(ApplicationManager.sending_data == false){
                     new Give_Window();
                 }
                 //if already connected to someone then disconnect
                 else {
-                    Staticwaliclass.removeRecivingDevice();
+                    ApplicationManager.removeRecivingDevice();
                 }
 
             }
@@ -146,7 +149,7 @@ public class Dashbord {
         frame.setVisible(true);
     }
     public void updateGiveButton(){
-        if(Staticwaliclass.sending_data){
+        if(ApplicationManager.sending_data){
             give.setText("Disconnect");
             give.setForeground(Color.WHITE);
             give.setBackground(Color.RED);
@@ -160,7 +163,7 @@ public class Dashbord {
     public void updateRemotePCpanel(){
         RemotePCPanel.removeAll();
 
-        for(Sending_Device i : Staticwaliclass.sendingDevices){
+        for(Sending_Device i : ApplicationManager.sendingDevices){
 
             JPanel jp = new JPanel();
             jp.setPreferredSize(new Dimension(250,187));
@@ -185,7 +188,7 @@ public class Dashbord {
                 public void mouseClicked(MouseEvent e) {
                     Sending_Device temp = null;
                     boolean found =false;
-                    for(Sending_Device i : Staticwaliclass.sendingDevices){
+                    for(Sending_Device i : ApplicationManager.sendingDevices){
                         if(i.client.getInetAddress().toString().equals(label.getText())){
                             temp = i;
                             found = true;
@@ -207,7 +210,7 @@ public class Dashbord {
                 public void actionPerformed(ActionEvent e) {
                     Sending_Device temp = null;
                     boolean found =false;
-                    for(Sending_Device i : Staticwaliclass.sendingDevices){
+                    for(Sending_Device i : ApplicationManager.sendingDevices){
                         if(i.client.getInetAddress().toString().equals(b.getText())){
                             temp = i;
                             found = true;
@@ -215,7 +218,7 @@ public class Dashbord {
                         }
                     }
                     if(found){
-                        Staticwaliclass.removeSendingDevice(temp);
+                        ApplicationManager.removeSendingDevice(temp);
                     }
                 }
             });

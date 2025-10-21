@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/azanmeow.iml" filepath="$PROJECT_DIR$/azanmeow.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Java-Socket-Based-Remote-Control-Application.iml" filepath="$PROJECT_DIR$/Java-Socket-Based-Remote-Control-Application.iml" />
     </modules>
   </component>
 </project>

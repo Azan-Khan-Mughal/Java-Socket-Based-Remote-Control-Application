@@ -1,15 +1,19 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.prefs.Preferences;
+package AppConfig;
 
-public class Staticwaliclass {
-    public static Color primary = new Color(25,25,25);
-    public static Color bg = new Color(69,69,69);
-    public static Color secondary = new Color(100,100,100);
+import Receiving.*;
+import Sending.*;
+import Frames.*;
+import Server.Server;
+
+import java.awt.*;
+import java.io.IOException;
+import java.util.ArrayList;
+
+public final class ApplicationManager {
+    public final static Color BACKGROUND_COLOUR = new Color(69,69,69);
+    public final static Color PRIMARY_COLOUR = new Color(25,25,25);
+    public final static Color SECONDARY_COLOUR = new Color(100,100,100);
+    public static Server server;
 
     public static int port;
     public static String password;
@@ -21,7 +25,7 @@ public class Staticwaliclass {
     public static  boolean sending_data = false;
     public static int terminatingSending = 696969;
     public static byte[] terminatingReciving = {1,2,3};
-    public Staticwaliclass(Dashbord d){
+    public ApplicationManager(Dashbord d){
         this.d = d;
     }
     public static void updateGUI(){

@@ -1,3 +1,8 @@
+package Frames;
+
+import AppConfig.ApplicationManager;
+import Sending.Sending_Device;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -5,25 +10,18 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.Socket;
 
-public class File_Transfer extends JFrame {
+public class Add_Window extends JFrame {
     public static void main(String[] args) {
-        new File_Transfer();
+        new Add_Window();
     }
-    File file = null;
     TextField iptf;
     TextField ptf;
     TextField porttf;
-    JFileChooser f;
-    JLabel b;
-    public File_Transfer(){
+    public Add_Window(){
         setSize(400,250);
         setLocation(300,300);
-        getContentPane().setBackground(Staticwaliclass.bg);
+        getContentPane().setBackground(ApplicationManager.BACKGROUND_COLOUR);
         setLayout(null);
-
-
-        f = new JFileChooser();
-        f.setDialogTitle("niggas");
 
         iptf = new TextField();
         Label ip = new Label("IP Address");
@@ -62,22 +60,14 @@ public class File_Transfer extends JFrame {
 
         add(p);
         add(ptf);
-
-        JButton connect = new JButton("Send");
+        JButton connect = new JButton("Connect");
         connect.setSize(100,20);
-        connect.setLocation(115,130);
+        connect.setLocation(115,140);
         connect.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(file == null){
-                    JOptionPane.showMessageDialog(null,
-                            "Error: No File Selected.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
                 try {
-                    Socket sc = new Socket(iptf.getText(), Integer.parseInt(porttf.getText()));
+                    Socket sc = new Socket(iptf.getText(),Integer.parseInt(porttf.getText()));
                     OutputStream output = sc.getOutputStream();
                     PrintWriter writer = new PrintWriter(output);
 
@@ -87,19 +77,22 @@ public class File_Transfer extends JFrame {
                     writer.println(ptf.getText());
                     writer.flush();
 
-                    System.out.println("password writed" + ptf.getText());
+                    System.out.println("password writed"+ ptf.getText());
 
                     String response = reader.readLine();
                     System.out.println("recived responce " + response);
-                    if (response.equals("YES")) {
-                        writer.println("3");
+                    if(response.equals("YES")){
+                        writer.println("1");
                         writer.flush();
 
-                        new File_Sending(sc, file);
-                    } else {
+                        System.out.println("Writed 1");
+                        ApplicationManager.sendingDevices.add(new Sending_Device(sc));
+                        ApplicationManager.updateGUI();
+                    }
+                    else{
                         System.out.println("ja kam kr apnna");
                     }
-                }catch (IOException ex){
+                } catch (Exception ex) {
                     JOptionPane.showMessageDialog(null,
                             "Error: Can't establish connection.",
                             "Error",
@@ -109,30 +102,6 @@ public class File_Transfer extends JFrame {
             }
         });
         add(connect);
-
-
-        b = new JLabel("No file selected yet");
-        b.setSize(120,20);
-        b.setLocation(245,70);
-        add(b);
-        JButton browse = new JButton("Browse");
-        browse.setSize(100,20);
-        browse.setLocation(250,100);
-        browse.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if(f.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
-                    file = f.getSelectedFile();
-                    System.out.println(file.length());
-                    b.setText("File: "+file.getName());
-
-                }
-            }
-        });
-        add(browse);
-
-
-
 
 
         setVisible(true);

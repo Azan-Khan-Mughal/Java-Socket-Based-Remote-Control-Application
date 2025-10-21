@@ -1,3 +1,8 @@
+package Frames;
+
+import AppConfig.ApplicationManager;
+import Receiving.Receiving_Device;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +20,7 @@ public class Give_Window extends JFrame {
     public Give_Window(){
         setSize(400,250);
         setLocation(300,300);
-        getContentPane().setBackground(Staticwaliclass.bg);
+        getContentPane().setBackground(ApplicationManager.BACKGROUND_COLOUR);
         setLayout(null);
 
         iptf = new TextField();
@@ -82,9 +87,9 @@ public class Give_Window extends JFrame {
                         writer.flush();
 
                         System.out.println("Writed 2");
-                        Staticwaliclass.receivingDevice = new Receiving_Device(sc);
-                        Staticwaliclass.sending_data = true;
-                        Staticwaliclass.updateGUI();
+                        ApplicationManager.receivingDevice = new Receiving_Device(sc);
+                        ApplicationManager.sending_data = true;
+                        ApplicationManager.updateGUI();
                     }
                     else{
                         System.out.println("ja kam kr apnna");
