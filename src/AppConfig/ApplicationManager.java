@@ -20,12 +20,12 @@ public final class ApplicationManager {
 
 
     public static ArrayList<Sending_Device> sendingDevices = new ArrayList<>();
-    public static Dashbord d;
+    public static Dashboard_Window d;
     public static Receiving_Device receivingDevice;
     public static  boolean sending_data = false;
     public static int terminatingSending = 696969;
     public static byte[] terminatingReciving = {1,2,3};
-    public ApplicationManager(Dashbord d){
+    public ApplicationManager(Dashboard_Window d){
         this.d = d;
     }
     public static void updateGUI(){

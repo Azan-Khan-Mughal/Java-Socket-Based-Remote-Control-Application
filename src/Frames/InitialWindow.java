@@ -2,13 +2,9 @@ package Frames;
 
 import AppConfig.ApplicationManager;
 import Server.Server;
-import Server.Server_Thread;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
 
 public class InitialWindow extends JFrame {
     public static void main(String[] args) {
@@ -37,7 +33,7 @@ public class InitialWindow extends JFrame {
                 dispose();
 
                 //Initiating main controller class and Dashboard
-                new ApplicationManager(new Dashbord());
+                new ApplicationManager(new Dashboard_Window());
 
 
             }

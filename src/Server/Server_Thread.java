@@ -19,6 +19,7 @@ public class Server_Thread extends Thread{
     @Override
     public void run() {
         try {
+            System.out.println("Thread running");
             while(true){
                 //Accepting connection
                 Socket client = this.serverSocket.accept();
@@ -87,7 +88,8 @@ public class Server_Thread extends Thread{
                 }
             }
         } catch (IOException e) {
-            ////
+            e.printStackTrace();
+            System.out.println("Server Thread Stopped");
         }
     }
 }

@@ -3,6 +3,7 @@ package Server;
 import AppConfig.ApplicationManager;
 
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class Server {
     int port;
@@ -35,7 +36,8 @@ public class Server {
         if (port < 1024 || port > 65535) {
             throw new Exception("Port must be between 1024 and 65535.");
         }
-        try(ServerSocket serverSocket = new ServerSocket(port) ){
+        try{
+            ServerSocket serverSocket = new ServerSocket(port);
             return serverSocket;
 
         }catch (Exception e){

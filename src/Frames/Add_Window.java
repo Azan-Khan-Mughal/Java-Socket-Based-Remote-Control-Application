@@ -5,106 +5,139 @@ import Sending.Sending_Device;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.net.Socket;
 
 public class Add_Window extends JFrame {
+
+    // --- UI Components ---
+    private TextField ipField;
+    private TextField portField;
+    private TextField passwordField;
+    private JButton connectButton;
+
+
+    // --- Main for testing ---
     public static void main(String[] args) {
         new Add_Window();
     }
-    TextField iptf;
-    TextField ptf;
-    TextField porttf;
-    public Add_Window(){
-        setSize(400,250);
-        setLocation(300,300);
+
+
+    // --- Constructor ---
+
+    public Add_Window() {
+        setUpUI();
+        setupEventHandlers();
+        setVisible(true);
+    }
+
+    void setupEventHandlers(){
+        connectButton.addActionListener(e -> connectToRemotePC());
+    }
+
+    // --- Core Connection Logic ---
+    private void connectToRemotePC() {
+        try {
+            String ip = ipField.getText().trim();
+            int port = Integer.parseInt(portField.getText().trim());
+            String password = passwordField.getText().trim();
+
+            Socket socket = new Socket(ip, port);
+
+            // Setup input/output streams
+            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            // Send password to verify connection
+            writer.println(password);
+            System.out.println("Password sent: " + password);
+
+            String response = reader.readLine();
+            System.out.println("Received response: " + response);
+
+            // If accepted, send handshake type "1"
+            if ("YES".equals(response)) {
+                writer.println("1");
+                writer.flush();
+
+                System.out.println("Sent code 1 - starting Sending_Device");
+                ApplicationManager.sendingDevices.add(new Sending_Device(socket));
+                ApplicationManager.updateGUI();
+            } else {
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Incorrect password or connection rejected.",
+                        "Access Denied",
+                        JOptionPane.ERROR_MESSAGE
+                );
+                socket.close();
+            }
+
+        } catch (IOException | NumberFormatException ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error: Unable to establish connection.",
+                    "Connection Failed",
+                    JOptionPane.ERROR_MESSAGE
+            );
+        } finally {
+            dispose();
+        }
+    }
+
+
+
+
+    // --- Setup UI layout and event handling ---
+    private void setUpUI() {
+        setTitle("Add Remote PC");
+        setSize(400, 250);
+        setLocation(300, 300);
         getContentPane().setBackground(ApplicationManager.BACKGROUND_COLOUR);
         setLayout(null);
+        setResizable(false);
 
-        iptf = new TextField();
-        Label ip = new Label("IP Address");
+        // --- IP Address ---
+        Label ipLabel = new Label("IP Address:");
+        ipField = new TextField();
 
-        ip.setSize(60,20);
-        iptf.setSize(120,20);
+        ipLabel.setBounds(40, 25, 80, 20);
+        ipField.setBounds(130, 25, 200, 20);
 
-        ip.setLocation(40,25);
-        iptf.setLocation(105,25);
+        add(ipLabel);
+        add(ipField);
 
-        add(ip);
-        add(iptf);
+        // --- Port ---
+        Label portLabel = new Label("Port:");
+        portField = new TextField();
 
-        porttf = new TextField();
-        Label port = new Label("Port");
+        portLabel.setBounds(40, 60, 80, 20);
+        portField.setBounds(130, 60, 200, 20);
 
-        port.setSize(60,20);
-        porttf.setSize(120,20);
+        add(portLabel);
+        add(portField);
 
-        port.setLocation(40,60);
-        porttf.setLocation(105,60);
+        // --- Password ---
+        Label passwordLabel = new Label("Password:");
+        passwordField = new TextField();
 
-        add(port);
-        add(porttf);
+        passwordLabel.setBounds(40, 95, 80, 20);
+        passwordField.setBounds(130, 95, 200, 20);
 
+        add(passwordLabel);
+        add(passwordField);
 
-
-        Label p = new Label("Password");
-        ptf = new TextField();
-
-        p.setSize(60,20);
-        ptf.setSize(120,20);
-
-        p.setLocation(40,95);
-        ptf.setLocation(105,95);
-
-        add(p);
-        add(ptf);
-        JButton connect = new JButton("Connect");
-        connect.setSize(100,20);
-        connect.setLocation(115,140);
-        connect.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    Socket sc = new Socket(iptf.getText(),Integer.parseInt(porttf.getText()));
-                    OutputStream output = sc.getOutputStream();
-                    PrintWriter writer = new PrintWriter(output);
-
-                    InputStream input = sc.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-
-                    writer.println(ptf.getText());
-                    writer.flush();
-
-                    System.out.println("password writed"+ ptf.getText());
-
-                    String response = reader.readLine();
-                    System.out.println("recived responce " + response);
-                    if(response.equals("YES")){
-                        writer.println("1");
-                        writer.flush();
-
-                        System.out.println("Writed 1");
-                        ApplicationManager.sendingDevices.add(new Sending_Device(sc));
-                        ApplicationManager.updateGUI();
-                    }
-                    else{
-                        System.out.println("ja kam kr apnna");
-                    }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null,
-                            "Error: Can't establish connection.",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-                dispose();
-            }
-        });
-        add(connect);
+        // --- Connect Button ---
+        connectButton = new JButton("Connect");
+        connectButton.setBounds(140, 140, 100, 30);
+        connectButton.setBackground(ApplicationManager.PRIMARY_COLOUR);
+        connectButton.setForeground(ApplicationManager.SECONDARY_COLOUR);
+        connectButton.setFocusable(false);
 
 
-        setVisible(true);
-
+        add(connectButton);
     }
+
+
 }
